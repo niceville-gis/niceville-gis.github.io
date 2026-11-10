@@ -1,0 +1,368 @@
+:root{
+    --forest:    #2e4a39;
+    --forest-dk: #223529;
+    --moss:      #7c8a5c;
+    --moss-dk:      #5a6b3f;
+    --moss-light:   #a3b18a;
+    --parchment:    #f4efe4;
+    --parchment-dk: #e9e1cf;
+    --line:      #cdc3a9;
+    --ink:       #2b271f;
+    --ink-soft:  #6b6353;
+    --paper:     #ffffff;
+
+    --font-display: "Patua One", Georgia, serif;
+    --font-body: "Poppins", Verdana, sans-serif;
+
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  *, *::before, *::after{ box-sizing: inherit; }
+
+  html{ scroll-padding-top: env(safe-area-inset-top, 0px); }
+
+  html, body{
+    height: 100%;
+    margin: 0;
+    background: var(--parchment-dk);
+    color: var(--ink);
+    font-family: var(--font-body);
+  }
+
+  .page{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 100vh;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 8px clamp(16px, 3vw, 32px);
+    padding-top: calc(8px + env(safe-area-inset-top, 0px));
+    background: var(--forest);
+    border-bottom: 1px solid var(--moss);
+    position: relative;
+    z-index: 5;
+  }
+
+  .brand{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+  }
+
+  .logo{
+    flex: none;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--forest);
+    color: var(--parchment);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 11px;
+    line-height: 1.15;
+    text-align: center;
+    letter-spacing: 0.02em;
+    box-shadow: inset 0 0 0 3px rgba(244,239,228,0.18);
+    cursor: default;
+  }
+
+  .brand-text{
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+    min-width: 0;
+  }
+
+  .brand-text h1{
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(24px, 3vw, 30px);
+    color: var(--parchment);
+    white-space: nowrap;
+    cursor: default;
+  }
+
+  .brand-text span{
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(20px, 2.7vw, 24px);
+    color: var(--parchment-dk);
+    white-space: nowrap;
+    cursor: default;
+  }
+
+  nav.top-links{
+    display: flex;
+    gap: clamp(14px, 2.5vw, 28px);
+    flex: none;
+  }
+
+  nav.top-links a, nav.top-links button{
+    font-family: var(--font-body);
+    color: var(--parchment-dk);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 1.3;
+    border-bottom: 1px solid var(--moss);
+    padding-bottom: 2px;
+    white-space: nowrap;
+  }
+  nav.top-links button{
+    background: none;
+    border: 0;
+    border-bottom: 1px solid var(--moss);
+    padding: 0 0 2px;
+    cursor: pointer;
+  }
+  nav.top-links a:hover, nav.top-links button:hover{ color: var(--parchment); border-color: var(--parchment-dk); }
+  nav.top-links a:focus-visible, nav.top-links button:focus-visible{ outline: 2px solid var(--forest); outline-offset: 3px; }
+
+  /* --- Modal Box --- */
+  .modal{
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+  }
+  .modal-content{
+    position: relative;
+    background-color: var(--paper);
+    margin: 15% auto;
+    padding: 15px;
+    border: 1px solid var(--line);
+    width: 80%;
+    max-width: 500px;
+    border-radius: 8px;
+  }
+  .modal-content h2{
+    font-family: var(--font-body);
+    font-size: 18px;
+    color: var(--forest);
+  }
+  .modal-content a{
+    background-color: var(--moss);
+    color: var(--parchment);
+    padding: 8px 12px;
+    text-decoration: none;
+    border-radius: 4px;
+    display: inline-block;
+    text-align: center;
+  }
+  .modal-content a:hover{
+    background-color: var(--moss-dk);
+  }
+  .close{
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    color: var(--moss);
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .close:hover,
+  .close:focus{
+    color: var(--moss-dk);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+
+  /* --- Main layout --- */
+  main{
+    flex: 1;
+    display: flex;
+    position: relative;
+    min-height: 0;
+    background: var(--parchment);
+  }
+
+  /* --- Map area --- */
+  .map{
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  /* --- Sidebar mechanics --- */
+	.wrapper { 
+    display: flex;
+    position: relative;
+    margin-left: -35px;
+    z-index: 2;
+   }
+  
+	.side-panel-toggle{
+		width: 35px;
+		height: 50px;
+		flex-shrink: 0;
+		display: grid;
+		place-items: center;
+		color: var(--parchment);
+		background: var(--moss);
+		border: none;
+		border-radius: 5px 0 0 5px;
+		outline: none;
+		cursor: pointer;
+	}
+
+	.side-panel-toggle:hover{ background: var(--moss-dk); }
+	.sp-icon-close{ display: none !important; }
+  .side-panel-open .panel{ display: flex; }
+	.side-panel-open .sp-icon-open{ display: none !important; }
+	.side-panel-open .sp-icon-close{ display: initial !important; }
+	
+  /* --- Sidebar panel --- */
+  .panel{
+    --panel-width: 350px;
+    width: var(--panel-width);
+    max-width: 88vw;
+    flex: none;
+    background: var(--paper);
+    border-left: 1px solid var(--line);
+    display: none;
+    flex-direction: column;
+    z-index: 5;
+  }
+
+  .tab{
+    display: flex;
+    border-bottom: 1px solid var(--line);
+    flex: none;
+  }
+
+  .tab button{
+    flex: 1;
+    background: var(--parchment-dk);
+    border: none;
+    border-right: 1px solid var(--line);
+    padding: 10px 6px;
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.25;
+    color: var(--forest);
+    cursor: pointer;
+  }
+  .tab button:last-child{ border-right: none; }
+  .tab button:hover{ background: var(--parchment); color: var(--forest-dk); }
+  .tab button:focus-visible{ outline: 1px solid var(--forest-dk); outline-offset: -2px; }
+  .tab button.active{
+    background: var(--paper);
+    color: var(--forest-dk);
+    font-weight: 400;
+    box-shadow: inset 0 -2px 0 var(--moss);
+  }
+
+  .tabcontent{
+    flex: 1;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 20px 22px;
+  }
+
+  /* ---- Scavenger Hunt Panel ---- */
+  .accordionHeader{
+    display: flex;
+    align-items: stretch;
+  }
+  .accordion {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    background-color: var(--paper);
+    color: var(--ink);
+    font-size:medium;
+    font-weight: 500;
+    font-family: var(--font-body);
+    cursor: pointer;
+    padding: 18px 18px 18px 6px;
+    width: auto;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+  }
+  .accordion::after{
+    content: "+";
+    flex: none;
+    margin-left: 12px;
+    color: var(--line);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1;
+  }
+  .accordion.active::after{ content: "−"; }
+  .accordionCheck{
+    display: grid;
+    place-items: center;
+    padding: 0 0 0 8px;
+    background-color: var(--paper);
+    cursor: pointer;
+  }
+  .accordionCheck input{
+    width: 18px;
+    height: 18px;
+    accent-color: var(--moss);
+    cursor: pointer;
+  }
+  .accordionPanel {
+    padding: 0 18px;
+    max-height: 0;
+    border-bottom: 1px solid var(--line);
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+  }
+
+  
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 720px){
+    header{ flex-wrap: wrap; row-gap: 10px; }
+    nav.top-links{ gap: 16px; }
+    main{ flex-direction: column; }
+    .wrapper{
+      flex-direction: column;
+      align-items: stretch;
+      margin-left: 0;
+      margin-top: -42.5px;
+    }
+    .panel{
+      width: 100%;
+      max-width: none;
+      border-left: none;
+      border-top: 1px solid var(--line);
+      height: 45vh;
+      max-height: 45vh;
+    }
+    .side-panel-toggle{
+      align-self: flex-start;
+      margin-right: 7.5px;
+      margin-bottom: -7.5px;
+      transform: rotate(90deg);
+    }
+  }

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Map | Turkey Creek Nature Trail</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href=".\img\CityLogo.png">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Patua+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Load the ArcGIS Maps SDK for JavaScript from CDN -->
+  <script type="module" src="https://js.arcgis.com/5.1/"></script> 
+</head>
+
+<body>
+<div class="page">
+
+  <header>
+    <div class="brand">
+      <div class="logo">
+        <img src=".\img\CityLogo.png" alt="City Logo" width="52px" height="52px">
+      </div>
+      <div class="brand-text">
+        <h1>Turkey Creek</h1>
+        <span>Nature Trail</span>
+      </div>
+    </div>
+    <nav class="top-links">
+      <a href="https://cityofniceville.org/271/Turkey-Creek-Nature-Trail" target="_blank">More Information</a>
+      <button id="modalBtn">Contact Us</button>
+    </nav>
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Questions about the park?</h2>
+        <a href="mailto:cmurry@nicevillefl.gov">Email Turkey Creek Staff &rarr;</a>
+        <h2>Questions about this website?</h2>
+        <a href="mailto:gis@nicevillefl.gov">Email GIS Department &rarr;</a>
+      </div>
+    </div>
+      
+  </header>
+
+  <main>
+    <!-- map element -->
+    <div class="map" id="map">
+      <arcgis-map id="my-map" item-id="74dd8d6b1f6242a1a4a865684abc4905">
+          <arcgis-zoom slot="top-left"></arcgis-zoom>
+          <arcgis-home slot="top-left" view="Map" visual-scale="m"></arcgis-home>
+          <arcgis-compass slot="top-left" view="Map" visual-scale="m"></arcgis-compass>
+      </arcgis-map>
+    </div>
+
+    <!-- side panel -->
+    <div class="wrapper side-panel-open">
+      <!-- side panel toggle button -->
+      <button class="side-panel-toggle" type="button">
+        <span class="material-icons sp-icon-open">keyboard_double_arrow_left</span>
+        <span class="material-icons sp-icon-close">keyboard_double_arrow_right</span>
+      </button>
+
+      <!-- side panel buttons & content -->
+      <div class="panel" id="panel"> 
+        <div class="tab">
+          <button class="tablinks" onclick="openTab(event, 'Legend')" id="defaultOpen">Map Legend</button>
+          <button class="tablinks" onclick="openTab(event, 'Environmental')">Environmental<br>Info</button>
+          <button class="tablinks" onclick="openTab(event, 'Scavenger')">Scavenger<br>Hunt</button>
+          <button class="tablinks" onclick="openTab(event, 'ParkInfo')">Park Info</button>
+        </div>
+        
+        <div id="Legend" class="tabcontent">
+          <arcgis-legend reference-element="my-map" legend-style = "stack"></arcgis-legend>
+        </div>
+        
+        <div id="Environmental" class="tabcontent">
+        <h4>Environmental Information</h4>
+          <p>Turkey Creek is fed by several freshwater springs and flows for roughly 12 miles until it reaches Boggy Bayou. The Turkey Creek drainage basin covers approximately 67 square miles and discharges an average of 150,000 gallons per minute.</p>
+          <p>Where the fresh water of Turkey Creek and the salt water of Boggy Bayou meet is called an estuary. The land surrounding the banks of Turkey Creek is saturated with water, so it is characterized as wetlands. Wetlands and estuaries are both transition zones. Estuaries transition from freshwater to saltwater, and wetlands from water to land.</p>
+        <h4>Why are wetlands and estuaries important?</h4>
+          <ul>
+            <li>Estuaries and coastal wetlands provide a safe habitat for feeding, spawning, and nursing for a wide variety of fish and other wildlife. Estuaries are often called the nurseries of the sea.</li>
+            <li>During storms, the wetland conditions of estuaries help to protect the land from flooding and storm surge by absorbing floodwater.</li>
+            <li>Wetlands and estuaries help to filter pollutants from the water, improving water quality for both wildlife and humans.</li>
+          </ul>
+        <h4>Why does the water in Turkey Creek look brown?</h4>
+          <img src = ".\img\TC_Water.jpg" alt="Turkey Creek's tannic water" style="max-width:100%;height:auto;">
+          <p>The brown, tea-colored appearance of the water in Turkey Creek is caused by tannins released from decomposing leaves, tree bark, or other vegetation that falls in the water. Tannins are a compound found in plants that cause a bitter taste as a defense mechanism against herbivores.</p>
+          <p>If the water looks more cloudy than clear, this is caused by sediment (usually silt or clay particles) or particulate organic matter that is suspended in the water. The measure of this is called turbidity. High turbidity often happens after heavy rainstorms when the particles are stirred up. Over time, these particles will settle to the bottom of the creek, and the water will be clear again.</p>
+        <hr>
+        <p><i>To learn more about the plants and animals at Turkey Creek, check out the scavenger hunt!</i></p>
+        </div>
+        
+        <div id="Scavenger" class="tabcontent">
+        <p>While you walk Turkey Creek, keep your eyes peeled for these plants and animals!</p>
+          <div class="accordionHeader">
+            <label class="accordionCheck"><input type="checkbox" aria-label="Mark Bald Cypress Tree as found"></label>
+            <button class="accordion" aria-expanded="false">Bald Cypress Tree</button>
+          </div>
+          <div class="accordionPanel">
+            <img src=".\img\CypressTree.jpeg" alt="Bald Cypress Tree" style="max-width:100%;height:auto;">
+            <p>The bald cypress is a conifer, bearing needles and cones. But unlike other conifers, the bald cypress needles turn orange and drop off in the fall and winter.</p> 
+            <p>Another distinctive feature is the cypress knees, protrusions of the root system that grow upward from the ground surrounding the tree. These help stabilize the tree in swampy or muddy conditions. It is also theorized that these knees help the submerged roots breathe.</p>
+          </div>
+          <div class="accordionHeader">
+            <label class="accordionCheck"><input type="checkbox" aria-label="Mark Live Oak Tree as found"></label>
+            <button class="accordion" aria-expanded="false">Live Oak Tree</button>
+          </div>
+          <div class="accordionPanel">
+            <img src=".\img\LiveOak.jpeg" alt="Live Oak Tree" style="max-width:100%;height:auto;">
+            <p>These semi-evergreen canopy trees are native to the southeastern United States. Live oak trees can live for hundreds of years and grow up to 80 feet tall with a canopy that can spread 100 to 150 feet wide.</p>
+          </div>
+          <div class="accordionHeader">
+            <label class="accordionCheck"><input type="checkbox" aria-label="Mark Squirrel as found"></label>
+            <button class="accordion" aria-expanded="false">Squirrel</button>
+          </div>
+          <div class="accordionPanel">
+            <img src=".\img\Squirrel.jpg" alt="Squirrel" style="max-width:100%;height:auto;">
+            <p>As the name suggests, eastern gray squirrels can be found all over the eastern United States. But at turkey creek you can usually find them up in the trees or on the boardwalk railings. Perhaps their most characteristic feature is their bushy tail, which is used as a balancing pole, a winter blanket, a sunshade, a predator warning signal, and a parachute to slow down falls.</p>
+          </div>
+          <div class="accordionHeader">
+            <label class="accordionCheck"><input type="checkbox" aria-label="Mark Turtle as found"></label>
+            <button class="accordion" aria-expanded="false">Turtle</button>
+          </div>
+          <div class="accordionPanel">
+            <img src=".\img\Turtles.jpg" alt="Turtle" style="max-width:100%;height:auto;">
+            <p>Many species of turtle can be easily spotted in the waters of Turkey Creek. The ones pictured above are yellow-bellied sliders. These turtles get their name for their habit of sliding off their perch on rocks or logs into the water at the first sign of danger.</p>
+          </div>
+          <div class="accordionHeader">
+            <label class="accordionCheck"><input type="checkbox" aria-label="Mark Snake as found"></label>
+            <button class="accordion" aria-expanded="false">Snake</button>
+          </div>
+          <div class="accordionPanel">
+            <img src=".\img\Snake.jpg" alt="Snake" style="max-width:100%;height:auto;">
+            <p>Snakes are usually found along the banks or swimming in the water. A commonly found species at Turkey Creek is the non-venomous brown water snake, pictured above.</p>
+          </div>
+          <div class="accordionHeader">
+            <label class="accordionCheck"><input type="checkbox" aria-label="Mark Green Anole Lizard as found"></label>
+            <button class="accordion" aria-expanded="false">Green Anole Lizard</button>
+          </div>
+          <div class="accordionPanel">
+            <img src=".\img\GreenAnole.jpeg" alt="Green Anole Lizard" style="max-width:100%;height:auto;">
+            <p>Green anoles are often called the “American chameleon” due to their ability to change color from bright green to brown or yellowish colors. They can be found in trees or along the boardwalk, easily spotted by their vibrant green color.</p>
+          </div>
+          <div class="accordionHeader">
+            <label class="accordionCheck"><input type="checkbox" aria-label="Mark Heron as found"></label>
+            <button class="accordion" aria-expanded="false">Heron</button>
+          </div>
+          <div class="accordionPanel">
+            <p>Two species of heron might be found wading in the water, waiting to catch their next meal: the Great Blue Heron or the Green Heron.</p>
+            <img src=".\img\BlueHeron.jpg" alt="Great Blue Heron" style="max-width:100%;height:auto;">
+            <p>The Great Blue Heron is the largest heron species in North America, standing up to four feet tall.</p>
+            <img src=".\img\GreenHeron.jpeg" alt="Green Heron" style="max-width:100%;height:auto;">
+            <p>The Green Heron is a smaller species, most notable for its ability to use tools like sticks to catch fish.</p>
+          </div>
+          <div class="accordionHeader">
+            <label class="accordionCheck"><input type="checkbox" aria-label="Mark Barred Owl as found"></label>
+            <button class="accordion" aria-expanded="false">Barred Owl</button>
+          </div>
+          <div class="accordionPanel">
+            <img src=".\img\Owl.jpg" alt="Barred Owl" style="max-width:100%;height:auto;">
+            <p>This is a rare find, but if you hear a call that sounds a bit like “who cooks for you?” you might be able to spot a barred owl up in the trees. While barred owls are common in this area, they are primarily nocturnal and crepuscular (most active at dawn and dusk), though they can sometimes be seen during the day.</p>
+          </div>
+          <div class="accordionHeader">
+            <label class="accordionCheck"><input type="checkbox" aria-label="Mark Water Strider as found"></label>
+            <button class="accordion" aria-expanded="false">Water Strider</button>
+          </div>
+          <div class="accordionPanel">
+            <img src=".\img\WaterStrider.jpeg" alt="Water Strider" style="max-width:100%;height:auto;">
+            <p>Like their name implies, water striders have the ability to walk on the surface of calm water. Their water-resistant legs have tiny hairs that trap air and allow them to stand on top of the water's surface tension.</p>
+          </div>
+          <div class="accordionHeader">
+            <label class="accordionCheck"><input type="checkbox" aria-label="Mark Orb Weaver Spider as found"></label>
+            <button class="accordion" aria-expanded="false">Orb Weaver Spider</button>
+          </div>
+          <div class="accordionPanel">
+            <img src=".\img\OrbWeaver.jpeg" alt="Orb Weaver Spider" style="max-width:100%;height:auto;">
+            <p>During the summertime, if you look up into the canopy above the boardwalk, you'll likely find an Orb Weaver. While these spiders may be big, they are harmless to humans. Orb Weavers are known (and named) for their intricate, circular webs.</p>
+          </div>
+        </div>
+        
+        <div id="ParkInfo" class="tabcontent">
+        <h4>Hours:</h4>
+          <ul>
+            <li>The park is open at 6:30 am 7 days a week. Closing times vary by season and are posted at the facility.</li>
+            <li>Turkey Creek will be closed every other Monday from 6:00 a.m. to 12:00 p.m. for regularly scheduled maintenance and clean-up.</li>
+          </ul>
+        <h4>Park Rules:</h4>
+          <ol>
+            <li>The boardwalk closes 20 minutes before the posted park closure.</li>
+            <li>Do not feed the animals.</li>
+            <li>Food may not be taken on the boardwalk beyond the pavilion.</li>
+            <li>No alcohol or glass containers are allowed.</li>
+            <li>Do not climb on the rails.</li>
+            <li>Jumping or diving from the walkway is prohibited.</li>
+            <li>Skateboards, rollerblades, skates, or bicycles are not allowed.</li>
+            <li>Pets are not allowed on the park grounds.</li>
+          </ol>
+        <h4>Other Useful Information:</h4>
+          <p>Turkey creek is a popular spot for swimming and other water recreation. Boat launches are located at the north and south end of the boardwalk. Canoes, kayaks, and tubes are allowed on the water, but <b>gasoline engines are not permitted.</b></p>
+          <p>The pavilion is well-equipped with lights, picnic tables, grills, and a beautiful stone fireplace hearth. It's a popular spot for events like birthday parties, office gatherings, socials, and team recognition ceremonies. The pavilion operates on a <b>first-come, first-served basis.</b></p>
+        </div>
+      </div>
+    </div>
+	
+  </main>
+</div>
+
+<script>
+  //Script for contact us modal
+  var modal = document.getElementById("myModal");
+  var btn = document.getElementById("modalBtn");
+  var span = document.getElementsByClassName("close")[0];
+
+  btn.onclick = function() {
+    modal.style.display = "block";
+  }
+
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+	//script for tab switching in side panel menu
+	function openTab(evt, tabName) {
+		var i, tabcontent, tablinks;
+		
+		tabcontent = document.getElementsByClassName("tabcontent");
+		for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none"; 
+		}
+		
+		tablinks = document.getElementsByClassName("tablinks");
+		for (i = 0; i < tablinks.length; i++) {
+		tablinks[i].className = tablinks[i].className.replace(" active", "");
+		}
+		
+		document.getElementById(tabName).style.display = "block";
+		evt.currentTarget.className += " active";
+	};
+	
+	document.getElementById("defaultOpen").click();
+	
+	//script for toggling the side panel open/closed
+	document.querySelector(".side-panel-toggle").addEventListener("click", () => {
+	document.querySelector(".wrapper").classList.toggle("side-panel-open");
+	});
+
+  //script for the scavenger hunt accordion
+  var acc = document.getElementsByClassName("accordion");
+  var i;
+
+  for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+      var isExpanded = this.classList.toggle("active");
+      this.setAttribute("aria-expanded", isExpanded);
+      var accordionPanel = this.parentElement.nextElementSibling;
+      if (accordionPanel.style.maxHeight) {
+        accordionPanel.style.maxHeight = null;
+      } else {
+        accordionPanel.style.maxHeight = accordionPanel.scrollHeight + "px";
+      }
+    });
+  }
+
+</script>
+</body>
+</html>
